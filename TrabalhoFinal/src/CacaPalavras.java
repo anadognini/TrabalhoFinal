@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class CacaPalavras {
-    // Atribuindo as palavras a serem procuradas à matriz palavras
     private String[][] palavrasEntrada(String[][] palavras) {
         palavras[0][0] = "IFELSE";
         palavras[1][0] = "FORA";
@@ -12,7 +11,6 @@ public class CacaPalavras {
         return palavras;
     }
 
-    // Atribuindo caracteres à matriz mapa
     private String[][] mapaEntrada(String[][] mapa) {
         mapa[0][0] = "D";
         mapa[0][1] = "C";
@@ -68,43 +66,105 @@ public class CacaPalavras {
         return mapa;
     }
 
-    // Imprimindo as palavras do caça palavras
     private void palavrasImprimir(String[][] palavras) {
         for (int i = 0; i < palavras.length; i++) {
-            for (int j = 0; j < palavras[i].length; j++) {
-                System.out.println(palavras[i][j]);
+            System.out.println(palavras[i][0]);
+        }
+    }
+    
+    private void mapaPesquisa(String[][] palavras, String palavraCompleta) {
+        for (int i = 0; i < palavras.length; i++) {
+            if (palavras[i][0].matches(palavraCompleta)) {
+                System.out.println(palavras[i][0] + " ENCONTRADA");
+            } else {
+                System.out.println(palavras[i][0] + " NÃO ENCONTRADA");
             }
         }
     }
 
-    /**
-     * O método palavrasRepostas usa a segunda coluna da matriz palavras e se a
-     * palavra não foi encontrada imprime
-     * "Palavra NÃO encontrada". Mas se a palavra foi encontrada deve-se imprimir a
-     * linha e coluna do mapa do primeiro
-     * caratere da palavra (conforme demostrado no exemplo de execução).
-     */
-    private void palavrasRespostas(Scanner teclado) {
-
-    }
-
-    // Imprimindo os caracteres da matriz mapa conforme demostrado no exemplo de
-    // execução
     private void mapaImprimir(String[][] mapa) {
+        System.out.println(" ---------------------");
+        int breakLine = 0;
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
-                System.out.print(mapa[i][j]);
+                if (breakLine == 5) {
+                    System.out.println(" |");
+                    breakLine = 0;
+                }
+                System.out.print(" | " + mapa[i][j]);
+                breakLine++;
             }
+        }
+
+        System.out.println(" |");
+        System.out.println(" ---------------------");
+    }
+
+    private void palavrasResposta(String[][] mapa, String[][] palavras) {
+        String palavraCompleta = "";
+        int breakLine = 0;
+
+        /** Busca palavras da direita para a esquerda */
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                if (breakLine == 5) {
+                    palavraCompleta = "";
+                    breakLine = 0;
+                }
+
+                breakLine++;
+                palavraCompleta += mapa[i][j];
+            }
+
+            mapaPesquisa(palavras, palavraCompleta);
+        }
+
+        /** Busca palavras da esquerda para a direita */
+        for (int i = 0; i < 10; i++) {
+            for (int j = 4; j >= 0; j--) {
+                if (breakLine == 5) {
+                    palavraCompleta = "";
+                    breakLine = 0;
+                }
+
+                breakLine++;
+                palavraCompleta += mapa[i][j];
+            }
+
+            mapaPesquisa(palavras, palavraCompleta);
+        }
+
+        /** Busca palavras de cima pra baixo */
+        for (int j = 0; j < mapa[0].length; j++) {
+            for (int i = 0; i < mapa.length; i++) {
+                if (breakLine == 10) {
+                    palavraCompleta = "";
+                    breakLine = 0;
+                }
+
+                breakLine++;
+                palavraCompleta += mapa[i][j];
+            }
+
+            mapaPesquisa(palavras, palavraCompleta);
+        }
+
+        /** Busca palavras de baixo para cima */ 
+        for (int j = 0; j < 5; j++) {
+            for (int i = 9; i >= 0; i--) {
+                if (breakLine == 10) {
+                    palavraCompleta = "";
+                    breakLine = 0;
+                }
+
+                breakLine++;
+                palavraCompleta += mapa[i][j];
+            }
+
+            mapaPesquisa(palavras, palavraCompleta);
         }
     }
 
-    // Fazendo a pesquisa para verificar se as palavras da matriz palavras se
-    // encontram na matriz mapa
-    private void mapaPesquisa() {
-
-    }
-
-    // Construtor
     public CacaPalavras() {
         Scanner teclado = new Scanner(System.in);
 
@@ -114,30 +174,27 @@ public class CacaPalavras {
         palavras = palavrasEntrada(palavras);
         mapa = mapaEntrada(mapa);
 
-        System.out.println("Informe a opção que deseja de acordo com o menu:"
-                + "\n Opção 1: listar palavras;"
-                + "\n Opção 2: listar o mapa;"
-                + "\n Opção 3: listar respostas;"
-                + "\n Opção 4: sair do menu."
-                + "\nQualquer outra opção será considerada como errada.");
-        int opcao = teclado.nextInt();
+        int opcao;
 
         do {
+            System.out.println("Informe a opção que deseja de acordo com o menu:"
+                    + "\n Opção 1: listar palavras;"
+                    + "\n Opção 2: listar o mapa;"
+                    + "\n Opção 3: listar respostas;"
+                    + "\n Opção 4: sair do menu.");
+
+            opcao = teclado.nextInt();
+
             switch (opcao) {
                 case 1:
-                    // Imprime infinitamente
                     palavrasImprimir(palavras);
                     break;
                 case 2:
-                    // Imprime infinitamente
                     mapaImprimir(mapa);
                     break;
                 case 3:
-                    palavrasRespostas(teclado);
+                    palavrasResposta(mapa, palavras);
                     break;
-                // Imprime infinitamente e considera opção 4 como errada
-                default:
-                    System.out.println("Opção ERRADA!...");
             }
         } while (opcao != 4);
 
