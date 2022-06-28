@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class CacaPalavras {
+
     private String[][] palavrasEntrada(String[][] palavras) {
         palavras[0][0] = "IFELSE";
         palavras[1][0] = "FORA";
@@ -72,19 +73,50 @@ public class CacaPalavras {
         }
     }
     
-    private void mapaPesquisa(String[][] palavras, String palavraCompleta) {
+    // ------ MODIFICAÇÕES A FAZER AQUI -------
+    // Feel free to change :D
+    private void mapaPesquisa(String[][] palavras, String palavraCompleta, String[][] mapa) {
+        boolean palavraEncontrada = false;
+        String palavra = "";
+
+        // Esse primeiro for apenas faz a verificação de ver se a palavra está ou não no mapa
+        // Criei uma variável do tipo String chamada palavra para poder atribuir a palavra encontrada
+        // e imprimi-la no próximo for
+
+        // Também criei um booleano chamado palavraEncontrada que irá ter como valor true caso a palavra
+        // seja encontrada no mapa, e terá valor falso caso a palavra não seja encontrada no mapa. Fiz
+        // isso também para poder iterar pelo próximo for
         for (int i = 0; i < palavras.length; i++) {
-            if (palavras[i][0].matches(palavraCompleta)) {
-                System.out.println(palavras[i][0] + " ENCONTRADA");
+            if (palavraCompleta.contains(palavras[i][0])) {
+                palavraEncontrada = true;
+
+                palavra = palavras[i][0];
             } else {
-                System.out.println(palavras[i][0] + " NÃO ENCONTRADA");
+                palavraEncontrada = false;
+                palavra = palavras[i][0];
             }
+        }
+
+        // Tive que criar um for que vai iterar pela matriz mapa para poder imprimir a posição
+        // da primeira letra da palavra encontrada no mapa, que nem no exemplo da professora
+        for (int j = 0; j < mapa.length; j++) {
+           for (int j2 = 0; j2 < mapa[j].length; j2++) {
+               if (palavraEncontrada == true) {
+                   // Imprime a palavra encontrada e os índices da primeira letra onde está no mapa
+                   System.out.println("[" + j + ", " + j2 + "] " + "Palavra encontrada " + palavra);
+                   break;
+            } else {
+                   System.out.println("Palavra não encontrada " + palavra);
+                    break;
+               }
+           } 
         }
     }
 
     private void mapaImprimir(String[][] mapa) {
         System.out.println(" ---------------------");
         int breakLine = 0;
+
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 if (breakLine == 5) {
@@ -95,7 +127,7 @@ public class CacaPalavras {
                 breakLine++;
             }
         }
-
+        
         System.out.println(" |");
         System.out.println(" ---------------------");
     }
@@ -104,7 +136,7 @@ public class CacaPalavras {
         String palavraCompleta = "";
         int breakLine = 0;
 
-        /** Busca palavras da direita para a esquerda */
+        /** Busca palavras da esquerda para a direita */
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 if (breakLine == 5) {
@@ -115,11 +147,10 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-
-            mapaPesquisa(palavras, palavraCompleta);
+            mapaPesquisa(palavras, palavraCompleta, mapa);
         }
 
-        /** Busca palavras da esquerda para a direita */
+        /** Busca palavras da direita para a esquerda */
         for (int i = 0; i < 10; i++) {
             for (int j = 4; j >= 0; j--) {
                 if (breakLine == 5) {
@@ -130,13 +161,14 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-
-            mapaPesquisa(palavras, palavraCompleta);
+            mapaPesquisa(palavras, palavraCompleta, mapa);
         }
 
+        breakLine = 0;
+        palavraCompleta = "";
         /** Busca palavras de cima pra baixo */
-        for (int j = 0; j < mapa[0].length; j++) {
-            for (int i = 0; i < mapa.length; i++) {
+        for (int j = 0 ; j < mapa[0].length ; j++) { //5
+            for (int i = 0 ; i < mapa.length; i++) { // 10
                 if (breakLine == 10) {
                     palavraCompleta = "";
                     breakLine = 0;
@@ -145,10 +177,11 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-
-            mapaPesquisa(palavras, palavraCompleta);
+            mapaPesquisa(palavras, palavraCompleta, mapa);
         }
 
+        breakLine = 0;
+        palavraCompleta = "";
         /** Busca palavras de baixo para cima */ 
         for (int j = 0; j < 5; j++) {
             for (int i = 9; i >= 0; i--) {
@@ -160,8 +193,7 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-
-            mapaPesquisa(palavras, palavraCompleta);
+            mapaPesquisa(palavras, palavraCompleta, mapa);
         }
     }
 
