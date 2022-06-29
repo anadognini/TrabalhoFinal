@@ -172,8 +172,8 @@ public class CacaPalavras {
                 }
             }
         }
+        
         mapaPesquisa(palavras);
-
     }
 
     public CacaPalavras() {
