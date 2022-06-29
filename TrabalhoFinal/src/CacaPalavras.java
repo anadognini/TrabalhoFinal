@@ -73,24 +73,33 @@ public class CacaPalavras {
         }
     }
 
-    private void mapaPesquisa(String[][] palavras, String palavraCompleta, String[][] mapa) {
-        String[][] palavrasEncontradas = new String[5][2];
+    // ---------- A desgraça está acontecendo nesse método aqui -----------
+    private void mapaPesquisa(String[][] palavras, String palavraCompleta) {
+        String[] palavrasEncontradas = new String[palavras[0][0].length()];
+        String[] palavrasNaoEncontradas = new String[palavras[0][0].length()];
 
-        for (int j = 0; j < palavras.length; j++) {
-            for (int j2 = 0; j2 < palavras[j].length; j2++) {
-                if (palavraCompleta.contains(palavras[j][j2])) {
-                    palavrasEncontradas[j][j2] += palavras[j][j2];
+        for (int i = 0; i < palavras.length; i++) {
+            if (palavraCompleta.contains(palavras[i][0])) {
+                int index = 0;
+                palavrasEncontradas[index] = palavras[i][0];
+                index++;
+            } else {
+                int index = 0;
+                palavrasNaoEncontradas[index] = palavras[i][0];
+                index++;
+            }
+        }
 
-                    System.out.println("Palavra encontrada " + palavrasEncontradas[j][j2]);
-                    break;
-                } else {
-                    System.out.println("Palavra não encontrada " + palavras[j][j2]);
-                    break;
-                }
+        for (int i = 0; i < palavrasEncontradas.length; i++) {
+            if (palavrasEncontradas[i] != null) {
+                System.out.println(palavrasEncontradas[i] + " encontrada");
+            } else if (palavrasNaoEncontradas[i] != null) {
+                System.out.println(palavrasNaoEncontradas[i] + " não encontrada");
             }
         }
     }
-
+//----------------------------------------------------------
+    
     private void mapaImprimir(String[][] mapa) {
         System.out.println(" ---------------------");
         int breakLine = 0;
@@ -125,7 +134,7 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta, mapa);
+            mapaPesquisa(palavras, palavraCompleta);
         }
 
         /** Busca palavras da direita para a esquerda */
@@ -139,7 +148,7 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta, mapa);
+            mapaPesquisa(palavras, palavraCompleta);
         }
 
         breakLine = 0;
@@ -155,7 +164,7 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta, mapa);
+            mapaPesquisa(palavras, palavraCompleta);
         }
 
         breakLine = 0;
@@ -171,7 +180,7 @@ public class CacaPalavras {
                 breakLine++;
                 palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta, mapa);
+            mapaPesquisa(palavras, palavraCompleta);
         }
     }
 
