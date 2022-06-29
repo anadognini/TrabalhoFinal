@@ -72,44 +72,22 @@ public class CacaPalavras {
             System.out.println(palavras[i][0]);
         }
     }
-    
-    // ------ MODIFICAÇÕES A FAZER AQUI -------
-    // Feel free to change :D
+
     private void mapaPesquisa(String[][] palavras, String palavraCompleta, String[][] mapa) {
-        boolean palavraEncontrada = false;
-        String palavra = "";
+        String[][] palavrasEncontradas = new String[5][2];
 
-        // Esse primeiro for apenas faz a verificação de ver se a palavra está ou não no mapa
-        // Criei uma variável do tipo String chamada palavra para poder atribuir a palavra encontrada
-        // e imprimi-la no próximo for
+        for (int j = 0; j < palavras.length; j++) {
+            for (int j2 = 0; j2 < palavras[j].length; j2++) {
+                if (palavraCompleta.contains(palavras[j][j2])) {
+                    palavrasEncontradas[j][j2] += palavras[j][j2];
 
-        // Também criei um booleano chamado palavraEncontrada que irá ter como valor true caso a palavra
-        // seja encontrada no mapa, e terá valor falso caso a palavra não seja encontrada no mapa. Fiz
-        // isso também para poder iterar pelo próximo for
-        for (int i = 0; i < palavras.length; i++) {
-            if (palavraCompleta.contains(palavras[i][0])) {
-                palavraEncontrada = true;
-
-                palavra = palavras[i][0];
-            } else {
-                palavraEncontrada = false;
-                palavra = palavras[i][0];
-            }
-        }
-
-        // Tive que criar um for que vai iterar pela matriz mapa para poder imprimir a posição
-        // da primeira letra da palavra encontrada no mapa, que nem no exemplo da professora
-        for (int j = 0; j < mapa.length; j++) {
-           for (int j2 = 0; j2 < mapa[j].length; j2++) {
-               if (palavraEncontrada == true) {
-                   // Imprime a palavra encontrada e os índices da primeira letra onde está no mapa
-                   System.out.println("[" + j + ", " + j2 + "] " + "Palavra encontrada " + palavra);
-                   break;
-            } else {
-                   System.out.println("Palavra não encontrada " + palavra);
+                    System.out.println("Palavra encontrada " + palavrasEncontradas[j][j2]);
                     break;
-               }
-           } 
+                } else {
+                    System.out.println("Palavra não encontrada " + palavras[j][j2]);
+                    break;
+                }
+            }
         }
     }
 
@@ -127,7 +105,7 @@ public class CacaPalavras {
                 breakLine++;
             }
         }
-        
+
         System.out.println(" |");
         System.out.println(" ---------------------");
     }
@@ -167,8 +145,8 @@ public class CacaPalavras {
         breakLine = 0;
         palavraCompleta = "";
         /** Busca palavras de cima pra baixo */
-        for (int j = 0 ; j < mapa[0].length ; j++) { //5
-            for (int i = 0 ; i < mapa.length; i++) { // 10
+        for (int j = 0; j < mapa[0].length; j++) { // 5
+            for (int i = 0; i < mapa.length; i++) { // 10
                 if (breakLine == 10) {
                     palavraCompleta = "";
                     breakLine = 0;
@@ -182,7 +160,7 @@ public class CacaPalavras {
 
         breakLine = 0;
         palavraCompleta = "";
-        /** Busca palavras de baixo para cima */ 
+        /** Busca palavras de baixo para cima */
         for (int j = 0; j < 5; j++) {
             for (int i = 9; i >= 0; i--) {
                 if (breakLine == 10) {
