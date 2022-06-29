@@ -12,57 +12,57 @@ public class CacaPalavras {
         return palavras;
     }
 
-    private String[][] mapaEntrada(String[][] mapa) {
-        mapa[0][0] = "D";
-        mapa[0][1] = "C";
-        mapa[0][2] = "Q";
-        mapa[0][3] = "W";
-        mapa[0][4] = "E";
-        mapa[1][0] = "I";
-        mapa[1][1] = "X";
-        mapa[1][2] = "F";
-        mapa[1][3] = "O";
-        mapa[1][4] = "R";
-        mapa[2][0] = "F";
-        mapa[2][1] = "F";
-        mapa[2][2] = "R";
-        mapa[2][3] = "G";
-        mapa[2][4] = "F";
-        mapa[3][0] = "E";
-        mapa[3][1] = "L";
-        mapa[3][2] = "I";
-        mapa[3][3] = "H";
-        mapa[3][4] = "W";
-        mapa[4][0] = "L";
-        mapa[4][1] = "S";
-        mapa[4][2] = "F";
-        mapa[4][3] = "O";
-        mapa[4][4] = "U";
-        mapa[5][0] = "S";
-        mapa[5][1] = "D";
-        mapa[5][2] = "G";
-        mapa[5][3] = "T";
-        mapa[5][4] = "S";
-        mapa[6][0] = "E";
-        mapa[6][1] = "J";
-        mapa[6][2] = "H";
-        mapa[6][3] = "E";
-        mapa[6][4] = "T";
-        mapa[7][0] = "I";
-        mapa[7][1] = "I";
-        mapa[7][2] = "I";
-        mapa[7][3] = "J";
-        mapa[7][4] = "M";
-        mapa[8][0] = "X";
-        mapa[8][1] = "C";
-        mapa[8][2] = "K";
-        mapa[8][3] = "B";
-        mapa[8][4] = "G";
-        mapa[9][0] = "V";
-        mapa[9][1] = "E";
-        mapa[9][2] = "T";
-        mapa[9][3] = "O";
-        mapa[9][4] = "R";
+    private char[][] mapaEntrada(char[][] mapa) {
+        mapa[0][0] = 'D';
+        mapa[0][1] = 'C';
+        mapa[0][2] = 'Q';
+        mapa[0][3] = 'W';
+        mapa[0][4] = 'E';
+        mapa[1][0] = 'I';
+        mapa[1][1] = 'X';
+        mapa[1][2] = 'F';
+        mapa[1][3] = 'O';
+        mapa[1][4] = 'R';
+        mapa[2][0] = 'F';
+        mapa[2][1] = 'F';
+        mapa[2][2] = 'R';
+        mapa[2][3] = 'G';
+        mapa[2][4] = 'F';
+        mapa[3][0] = 'E';
+        mapa[3][1] = 'L';
+        mapa[3][2] = 'I';
+        mapa[3][3] = 'H';
+        mapa[3][4] = 'W';
+        mapa[4][0] = 'L';
+        mapa[4][1] = 'S';
+        mapa[4][2] = 'F';
+        mapa[4][3] = 'O';
+        mapa[4][4] = 'U';
+        mapa[5][0] = 'S';
+        mapa[5][1] = 'D';
+        mapa[5][2] = 'G';
+        mapa[5][3] = 'T';
+        mapa[5][4] = 'S';
+        mapa[6][0] = 'E';
+        mapa[6][1] = 'J';
+        mapa[6][2] = 'H';
+        mapa[6][3] = 'E';
+        mapa[6][4] = 'T';
+        mapa[7][0] = 'I';
+        mapa[7][1] = 'I';
+        mapa[7][2] = 'I';
+        mapa[7][3] = 'J';
+        mapa[7][4] = 'M';
+        mapa[8][0] = 'X';
+        mapa[8][1] = 'C';
+        mapa[8][2] = 'K';
+        mapa[8][3] = 'B';
+        mapa[8][4] = 'G';
+        mapa[9][0] = 'V';
+        mapa[9][1] = 'E';
+        mapa[9][2] = 'T';
+        mapa[9][3] = 'O';
+        mapa[9][4] = 'R';
 
         return mapa;
     }
@@ -73,34 +73,17 @@ public class CacaPalavras {
         }
     }
 
-    // ---------- A desgraça está acontecendo nesse método aqui -----------
-    private void mapaPesquisa(String[][] palavras, String palavraCompleta) {
-        String[] palavrasEncontradas = new String[palavras[0][0].length()];
-        String[] palavrasNaoEncontradas = new String[palavras[0][0].length()];
-
-        for (int i = 0; i < palavras.length; i++) {
-            if (palavraCompleta.contains(palavras[i][0])) {
-                int index = 0;
-                palavrasEncontradas[index] = palavras[i][0];
-                index++;
+    private void mapaPesquisa(String[][] palavras) {
+        for (int i = 0; i < 5; i++) {
+            if (palavras[i][1] != null) {
+                System.out.println(palavras[i][1]);
             } else {
-                int index = 0;
-                palavrasNaoEncontradas[index] = palavras[i][0];
-                index++;
-            }
-        }
-
-        for (int i = 0; i < palavrasEncontradas.length; i++) {
-            if (palavrasEncontradas[i] != null) {
-                System.out.println(palavrasEncontradas[i] + " encontrada");
-            } else if (palavrasNaoEncontradas[i] != null) {
-                System.out.println(palavrasNaoEncontradas[i] + " não encontrada");
+                System.out.println("Palavra NÃO encontrada: " + palavras[i][0]);
             }
         }
     }
-//----------------------------------------------------------
-    
-    private void mapaImprimir(String[][] mapa) {
+
+    private void mapaImprimir(char[][] mapa) {
         System.out.println(" ---------------------");
         int breakLine = 0;
 
@@ -119,76 +102,85 @@ public class CacaPalavras {
         System.out.println(" ---------------------");
     }
 
-    private void palavrasResposta(String[][] mapa, String[][] palavras) {
-        String palavraCompleta = "";
-        int breakLine = 0;
+    private void palavrasResposta(char[][] mapa, String[][] palavras) {
+        for (int i = 0; i < palavras.length; i++) {
+            String palavra = palavras[i][0];
+            int tamanhoPalavra = palavra.length();
+            int k = 0;
 
-        /** Busca palavras da esquerda para a direita */
-        for (int i = 0; i < mapa.length; i++) {
-            for (int j = 0; j < mapa[i].length; j++) {
-                if (breakLine == 5) {
-                    palavraCompleta = "";
-                    breakLine = 0;
+            /** Busca palavras da esquerda para a direita */
+            for (int l = 0; l < mapa.length; l++) {
+                k = 0;
+                for (int j = 0; j < 5; j++) {
+                    if (mapa[l][j] == palavra.charAt(k)) {
+                        k++;
+                        if (k == tamanhoPalavra) {
+                            palavras[i][1] = "[" + (l) + ", " + (j - (k - 1)) + "]" + " - " + palavra;
+                            k = 0;
+                        }
+                    } else {
+                        k = 0;
+                    }
                 }
-
-                breakLine++;
-                palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta);
-        }
 
-        /** Busca palavras da direita para a esquerda */
-        for (int i = 0; i < 10; i++) {
-            for (int j = 4; j >= 0; j--) {
-                if (breakLine == 5) {
-                    palavraCompleta = "";
-                    breakLine = 0;
+            /** Busca palavras da direita para a esquerda */
+            for (int l = mapa.length - 1; l >= 0; l--) {
+                k = 0;
+                for (int j = 4; j >= 0; j--) {
+                    if (mapa[l][j] == palavra.charAt(k)) {
+                        k++;
+                        if (k == tamanhoPalavra) {
+                            palavras[i][1] = "[" + (l) + ", " + (j + (k - 1)) + "]" + " - " + palavra;
+                            k = 0;
+                        }
+                    } else {
+                        k = 0;
+                    }
                 }
-
-                breakLine++;
-                palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta);
-        }
 
-        breakLine = 0;
-        palavraCompleta = "";
-        /** Busca palavras de cima pra baixo */
-        for (int j = 0; j < mapa[0].length; j++) { // 5
-            for (int i = 0; i < mapa.length; i++) { // 10
-                if (breakLine == 10) {
-                    palavraCompleta = "";
-                    breakLine = 0;
+            /** Busca palavras de cima pra baixo */
+            for (int j = 0; j < 4; j++) {
+                k = 0;
+                for (int l = 0; l < mapa.length; l++) {
+                    if (mapa[l][j] == palavra.charAt(k)) {
+                        k++;
+                        if (k == tamanhoPalavra) {
+                            palavras[i][1] = "[" + (l - (k - 1)) + ", " + (j) + "]" + " - " + palavra;
+                            k = 0;
+                        }
+                    } else {
+                        k = 0;
+                    }
                 }
-
-                breakLine++;
-                palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta);
-        }
 
-        breakLine = 0;
-        palavraCompleta = "";
-        /** Busca palavras de baixo para cima */
-        for (int j = 0; j < 5; j++) {
-            for (int i = 9; i >= 0; i--) {
-                if (breakLine == 10) {
-                    palavraCompleta = "";
-                    breakLine = 0;
+            /** Busca palavras de baixo para cima */
+            for (int j = 0; j < 5; j++) {
+                k = 0;
+                for (int l = 9; l >= 0; l--) {
+                    if (mapa[l][j] == palavra.charAt(k)) {
+                        k++;
+                        if (k == tamanhoPalavra) {
+                            palavras[i][1] = "[" + (l + (k - 1)) + ", " + (j) + "]" + " - " + palavra;
+                            k = 0;
+                        }
+                    } else {
+                        k = 0;
+                    }
                 }
-
-                breakLine++;
-                palavraCompleta += mapa[i][j];
             }
-            mapaPesquisa(palavras, palavraCompleta);
         }
+        mapaPesquisa(palavras);
+
     }
 
     public CacaPalavras() {
         Scanner teclado = new Scanner(System.in);
 
         String[][] palavras = new String[5][2];
-        String[][] mapa = new String[10][5];
+        char[][] mapa = new char[10][5];
 
         palavras = palavrasEntrada(palavras);
         mapa = mapaEntrada(mapa);
